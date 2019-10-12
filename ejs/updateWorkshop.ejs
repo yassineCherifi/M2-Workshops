@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./head %>
+</head>
+<body class="container">
+    <% if(workshop != undefined) { %>
+<form action="/update-workshop/<%= workshop.name %>" method="post">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="<%= workshop.name %>" class="form-control" id="name"  placeholder="Workshop Name" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" value="<%= workshop.description %>" name="description" class="form-control" id="description" placeholder="Give a description for your workshop" required>
+    </div>
+    <%}%>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a type="button" class="btn btn-secondary" href="/">Cancel</a>
+</form>
+
+<footer>
+    <% include ./footer %>
+</footer>
+
+</body>
+</html>
