@@ -38,9 +38,13 @@ function removeWorkshopByName(name) {
         })
         }
 
+        // on suppose que le nom du workshop est unique
 function updateWorkshop(name,newWorkshop) {
     return new Promise((resolve, reject) => {
-        
+        const toModify = inMemoryWorkshop.find(workshop => workshop.name === name)
+        toModify.name = newWorkshop.name
+        toModify.description = newWorkshop.description
+        resolve()
     })
 }
 

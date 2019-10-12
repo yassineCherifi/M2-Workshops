@@ -39,6 +39,8 @@ app.get('/workshop', function (req, res) {
     res.render('workshop')
 })
 
+// on suppose que le nom du workshop est unique
+
 app.get('/updateworkshop/:name', function (req, res) {
     const workshopName = req.params.name
     InMemoryWorkshop.getWorkshopByName(workshopName)
@@ -85,8 +87,21 @@ app.get('/remove-workshop/:name', function (req, res) {
 
 })
 
+// on suppose que le nom du workshop est unique
+
 app.post('/update-workshop/:name', function (req, res) {
-   
+    const name = req.params.name
+    const newName = req.body.name
+    const newDesc = req.body.description
+    InMemoryWorkshop.updateWorkshop(name, { name: newName, description: newDesc }).then(() => {
+        InMemoryWorkshop.getWorkshopList()
+            .then(workshops => {
+                res.render("index", {
+                    workshops: workshops
+                })
+            })
+    })
+        .catch(e => res.send(e.message))
 })
 app.get('*', function (req, res) {
     res.redirect('/');
